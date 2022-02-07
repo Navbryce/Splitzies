@@ -16,15 +16,17 @@ const Home: FunctionalComponent = () => {
 
   const [file, setFile] = useState<File>();
   const onSplitzies = useCallback(async () => {
-    if (file && googleApi) {
-      googleApi.execute(async (api) => {
-        const spreadSheet = await generateSheet(file);
-        const response = await (api.client as any).sheets.spreadsheets.create(
-          spreadSheet
-        );
-        console.log(response.result.spreadsheetUrl);
-      });
+    if (!file || !googleApi) {
+      return;
     }
+    // TODO: Error handling, load icon, copy and paste url
+    googleApi.execute(async (api) => {
+      const spreadSheet = await generateSheet(file);
+      const response = await (api.client as any).sheets.spreadsheets.create(
+        spreadSheet
+      );
+      console.log(response.result.spreadsheetUrl);
+    });
   }, [file, googleApi]);
   return (
     <div class={style.home}>

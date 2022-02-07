@@ -1,3 +1,4 @@
+type GoogleUser = gapi.auth2.GoogleUser;
 export class GoogleApiClient {
   private user: GoogleUser | null;
 
