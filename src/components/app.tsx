@@ -45,7 +45,10 @@ const App: FunctionalComponent = () => {
 
   return (
     <GAPIContext.Provider value={initializedGoogleAPI}>
-      <div id="preact_root">
+      <div
+        id="preact_root"
+        class="dark dark:bg-gradient-to-r dark:bg-primary-900 dark:from-primary-800 dark:text-blue-100"
+      >
         <Header />
         <Router>
           <Route path="/" component={Home} />

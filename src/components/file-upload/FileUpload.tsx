@@ -3,9 +3,13 @@ import { useCallback } from "preact/compat";
 
 type Props = {
   onChange: (file: File) => void;
+  accept?: string;
 };
 
-const FileUpload: FunctionalComponent<Props> = ({ onChange }: Props) => {
+const FileUpload: FunctionalComponent<Props> = ({
+  onChange,
+  accept,
+}: Props) => {
   const onFileChangeCallback = useCallback(
     (event: { target: EventTarget | null }) => {
       const target = event.target as HTMLInputElement | null;
@@ -21,7 +25,7 @@ const FileUpload: FunctionalComponent<Props> = ({ onChange }: Props) => {
 
   return (
     <div>
-      <input type="file" onChange={onFileChangeCallback} />
+      <input type="file" onChange={onFileChangeCallback} accept={accept} />
     </div>
   );
 };

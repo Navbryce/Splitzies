@@ -14,4 +14,27 @@ export default (config, env, helpers) => {
             {}
         ))
     );
+
+    // tailwind
+    const postCssLoaders = helpers.getLoadersByName(config, 'postcss-loader');
+    postCssLoaders.forEach(({ loader }) => {
+        const plugins = loader.options.postcssOptions.plugins;
+
+        // Add tailwind css at the top.
+        plugins.unshift(require('tailwindcss'));
+
+        // for purging css to make build smaller
+        const purgecss = require('@fullhuman/postcss-purgecss')({
+            // Specify the paths to all of the template files in your project
+            content: ['./src/**/*.{js,jsx,ts,tsx}'],
+
+            // Include any special characters you're using in this regular expression
+            defaultExtractor: content => content.match(params.regex) || [],
+        });
+        if (process.env.NODE_ENV === 'production') {
+            console.log("PROD")
+            plugins.push(purgecss);
+        }
+    });
+    return config;
 }
