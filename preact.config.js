@@ -31,7 +31,7 @@ export default (config, env, helpers) => {
             // Include any special characters you're using in this regular expression
             defaultExtractor: content => content.match(params.regex) || [],
         });
-        if (process.env.NODE_ENV === 'production') {
+        if (process.env.NETLIFY) {
             console.log("PROD")
             plugins.push(purgecss);
         }
