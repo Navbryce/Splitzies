@@ -1,19 +1,31 @@
 import { FunctionalComponent, h } from "preact";
 import style from "./style.css";
 import FileUpload from "../../components/FileUpload/FileUpload";
-import { useCallback, useContext, useState } from "preact/compat";
+import { useCallback, useContext, useEffect, useState } from "preact/compat";
 import { generateSheet } from "../../actions/generate-sheet";
 import { GAPIContext } from "../../contexts";
 
 const Home: FunctionalComponent = () => {
-  const gapiClient = useContext(GAPIContext);
+  const googleApi = useContext(GAPIContext);
+
+  useEffect(() => {
+    if (!googleApi) {
+      return;
+    }
+  }, [googleApi]);
 
   const [file, setFile] = useState<File>();
-  const onSplitzies = useCallback(() => {
-    if (file && gapiClient) {
-      generateSheet(file);
+  const onSplitzies = useCallback(async () => {
+    if (file && googleApi) {
+      googleApi.execute(async (api) => {
+        const spreadSheet = await generateSheet(file);
+        const response = await (api.client as any).sheets.spreadsheets.create(
+          spreadSheet
+        );
+        console.log(response.result.spreadsheetUrl);
+      });
     }
-  }, [file, gapiClient]);
+  }, [file, googleApi]);
   return (
     <div class={style.home}>
       <h1>Instacart Receipt Splitter</h1>

@@ -31,6 +31,7 @@
   "devDependencies": {
     "@types/enzyme": "^3.10.5",
     "@types/gapi": "^0.0.41",
+    "@types/gapi.auth2": "^0.0.56",
     "@types/jest": "^26.0.8",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",

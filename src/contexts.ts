@@ -1,5 +1,6 @@
 import { createContext } from "preact";
+import { GoogleApiClient } from "./utils/GoogleApiClient";
 
-export const GAPIContext = createContext<typeof gapi.client | undefined>(
+export const GAPIContext = createContext<GoogleApiClient | undefined>(
   undefined
 );

@@ -7,15 +7,17 @@ import Header from "./header";
 import useScript from "../hooks/use-script";
 import { useCallback, useEffect, useState } from "preact/compat";
 import { GAPIContext } from "../contexts";
+import { GoogleApiClient } from "../utils/GoogleApiClient";
 
-const GOOGLE_SCOPES = ".../auth/spreadsheets.readonly";
+const GOOGLE_SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 const GOOGLE_SHEETS_DISCOVER_DOCS = [
   "https://sheets.googleapis.com/$discovery/rest?version=v4",
 ];
 
 const App: FunctionalComponent = () => {
   const [googleApi, setGoogleApi] = useState<typeof gapi>();
-  const [gapiClient, setGapiClient] = useState<typeof gapi.client>();
+  const [initializedGoogleAPI, setInitializedGoogleAPI] =
+    useState<GoogleApiClient>();
 
   const handleClientLoad = useCallback(() => {
     setGoogleApi((window as unknown as { gapi: typeof gapi }).gapi);
@@ -28,7 +30,7 @@ const App: FunctionalComponent = () => {
       clientId: process.env.GOOGLE_CLIENT_ID,
       scope: GOOGLE_SCOPES,
     });
-    setGapiClient(gapi.client);
+    setInitializedGoogleAPI(new GoogleApiClient(googleApi as typeof gapi));
   }, [googleApi]);
 
   useEffect(() => {
@@ -42,7 +44,7 @@ const App: FunctionalComponent = () => {
   });
 
   return (
-    <GAPIContext.Provider value={gapiClient}>
+    <GAPIContext.Provider value={initializedGoogleAPI}>
       <div id="preact_root">
         <Header />
         <Router>
