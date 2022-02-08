@@ -26,13 +26,18 @@ export default (config, env, helpers, params = defaultParams) => {
         // for purging css to make build smaller
         const purgecss = require('@fullhuman/postcss-purgecss')({
             // Specify the paths to all of the template files in your project
-            content: ['./src/**/*.{js,jsx,ts,tsx}'],
+            content: [
+                './src/**/*.html',
+                './src/**/*.js',
+                './src/**/*.jsx',
+                './src/**/*.ts',
+                './src/**/*.tsx',
+            ],
 
-            // Include any special characters you're using in this regular expression
-            defaultExtractor: content => content.match(params.regex) || [],
+            defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
         });
         if (process.env.NETLIFY) {
-            console.log("PROD")
+            // minimize build for deploys
             plugins.push(purgecss);
         }
     });
