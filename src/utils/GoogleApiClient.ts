@@ -18,7 +18,7 @@ export class GoogleApiClient {
     if (!this.isSignedIn && !(await this.signIn())) {
       throw new Error("Failed to sign in");
     }
-    action(this.googleApi);
+    await action(this.googleApi);
   }
 
   public async signIn(): Promise<GoogleUser> {

@@ -3,6 +3,8 @@ import FileUpload from "../../components/file-upload/FileUpload";
 import { useCallback, useContext, useEffect, useState } from "preact/compat";
 import { generateSheet } from "../../actions/generate-sheet";
 import { GAPIContext } from "../../contexts";
+import ClipboardText from "../../components/clipboard-text/ClipboardText";
+import Spinner from "../../components/spinner/Spinner";
 
 const Home: FunctionalComponent = () => {
   const googleApi = useContext(GAPIContext);
@@ -14,6 +16,7 @@ const Home: FunctionalComponent = () => {
   }, [googleApi]);
 
   const [file, setFile] = useState<File>();
+  const [loading, setLoading] = useState<boolean>(false);
   const [url, setUrl] = useState<string | null>(null);
 
   const onSplitzies = useCallback(async () => {
@@ -21,13 +24,15 @@ const Home: FunctionalComponent = () => {
       return;
     }
     // TODO: Error handling, load icon, copy and paste url
-    googleApi.execute(async (api) => {
+    setLoading(true);
+    await googleApi.execute(async (api) => {
       const spreadSheet = await generateSheet(file);
       const response = await (api.client as any).sheets.spreadsheets.create(
         spreadSheet
       );
       setUrl(response.result.spreadsheetUrl);
     });
+    setLoading(false);
   }, [file, googleApi]);
   return (
     <div class="p-6">
@@ -59,10 +64,12 @@ const Home: FunctionalComponent = () => {
             </div>
           </li>
           <li class="p-3">
-            <button onClick={onSplitzies}>Splitzies!</button>
+            <button onClick={onSplitzies}>
+              {loading && <Spinner />}Splitzies!
+            </button>
           </li>
         </ol>
-        {url && <h2>{url}</h2>}
+        {url && <ClipboardText text={url} />}
       </div>
     </div>
   );
