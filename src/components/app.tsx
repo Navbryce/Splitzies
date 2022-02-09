@@ -8,6 +8,8 @@ import useScript from "../hooks/use-script";
 import { useCallback, useEffect, useState } from "preact/compat";
 import { GAPIContext } from "../contexts";
 import { GoogleApiClient } from "../utils/GoogleApiClient";
+import PrivacyPolicy from "../routes/privacy-policy";
+import Footer from "./Footer";
 
 const GOOGLE_SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 const GOOGLE_SHEETS_DISCOVER_DOCS = [
@@ -49,13 +51,17 @@ const App: FunctionalComponent = () => {
     <GAPIContext.Provider value={initializedGoogleAPI}>
       <div
         id="preact_root"
-        class="dark dark:bg-gradient-to-r dark:bg-primary-900 dark:from-primary-800 dark:text-blue-100"
+        class="dark dark:bg-gradient-to-r dark:bg-primary-900 dark:from-primary-800 dark:text-blue-100 h-screen overflow-y-scroll flex flex-col justify-between"
       >
-        <Header />
-        <Router>
-          <Route path="/" component={Home} />
-          <NotFoundPage default />
-        </Router>
+        <div>
+          <Header />
+          <Router>
+            <Route path="/" component={Home} />
+            <Route path="/privacy-policy" component={PrivacyPolicy} />
+            <NotFoundPage default />
+          </Router>
+        </div>
+        <Footer />
       </div>
     </GAPIContext.Provider>
   );
