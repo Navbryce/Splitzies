@@ -1,10 +1,10 @@
 import { FunctionalComponent, h } from "preact";
-import FileUpload from "../../components/file-upload/FileUpload";
+import FileUpload from "../../components/FileUpload";
 import { useCallback, useContext, useEffect, useState } from "preact/compat";
 import { generateSheet } from "../../actions/generate-sheet";
 import { GAPIContext } from "../../contexts";
-import ClipboardText from "../../components/clipboard-text/ClipboardText";
-import Spinner from "../../components/spinner/Spinner";
+import ClipboardText from "../../components/ClipboardText";
+import Spinner from "../../components/Spinner";
 
 const Home: FunctionalComponent = () => {
   const googleApi = useContext(GAPIContext);

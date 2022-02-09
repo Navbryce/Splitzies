@@ -1,5 +1,5 @@
 import { FunctionalComponent, h, Fragment } from "preact";
-import ClipboardIcon from "../icons/ClipboardIcon";
+import ClipboardIcon from "./icons/ClipboardIcon";
 import { useCallback, useState } from "preact/compat";
 
 type Props = {

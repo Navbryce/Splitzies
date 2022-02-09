@@ -3,7 +3,7 @@ import { Route, Router } from "preact-router";
 
 import Home from "../routes/home";
 import NotFoundPage from "../routes/notfound";
-import Header from "./header/Header";
+import Header from "./Header";
 import useScript from "../hooks/use-script";
 import { useCallback, useEffect, useState } from "preact/compat";
 import { GAPIContext } from "../contexts";
