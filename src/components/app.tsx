@@ -26,13 +26,27 @@ const App: FunctionalComponent = () => {
   }, []);
 
   const initClientCallback = useCallback(async () => {
-    await gapi.client.init({
-      apiKey: process.env.GOOGLE_API_KEY,
-      discoveryDocs: GOOGLE_SHEETS_DISCOVER_DOCS,
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      scope: GOOGLE_SCOPES,
-    });
-    setInitializedGoogleAPI(new GoogleApiClient(googleApi as typeof gapi));
+    try {
+      await gapi.client.init({
+        apiKey: process.env.GOOGLE_API_KEY,
+        discoveryDocs: GOOGLE_SHEETS_DISCOVER_DOCS,
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        scope: GOOGLE_SCOPES,
+      });
+      setInitializedGoogleAPI(new GoogleApiClient(googleApi as typeof gapi));
+    } catch (error) {
+      if (
+        (error as { details: string }).details
+          ?.toLowerCase()
+          .includes("cookies")
+      ) {
+        alert(
+          "Please enable 3rd party cookies and refresh the page. This a limitation of the Google Auth and not of the Splitzies application."
+        );
+        return;
+      }
+      throw error;
+    }
   }, [googleApi]);
 
   useEffect(() => {
