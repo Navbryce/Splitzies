@@ -5,8 +5,8 @@ import Home from "../routes/home";
 import NotFoundPage from "../routes/notfound";
 import Header from "./Header";
 import useScript from "../hooks/use-script";
-import { useCallback, useEffect, useState } from "preact/compat";
-import { GAPIContext } from "../contexts";
+import { useCallback, useContext, useEffect, useState } from "preact/compat";
+import { AlertContext, GAPIContext } from "../contexts";
 import { GoogleApiClient } from "../utils/GoogleApiClient";
 import PrivacyPolicy from "../routes/privacy-policy";
 import Footer from "./Footer";
@@ -17,6 +17,7 @@ const GOOGLE_SHEETS_DISCOVER_DOCS = [
 ];
 
 const App: FunctionalComponent = () => {
+  const alertService = useContext(AlertContext);
   const [googleApi, setGoogleApi] = useState<typeof gapi>();
   const [initializedGoogleAPI, setInitializedGoogleAPI] =
     useState<GoogleApiClient>();
@@ -40,9 +41,10 @@ const App: FunctionalComponent = () => {
           ?.toLowerCase()
           .includes("cookies")
       ) {
-        alert(
-          "Please enable 3rd party cookies and refresh the page. This a limitation of the Google Auth and not of the Splitzies application."
-        );
+        await alertService.alert({
+          title: "Error",
+          text: "Please enable 3rd party cookies and refresh the page. This a limitation of the Google Auth and not of the Splitzies application.",
+        });
         return;
       }
       throw error;

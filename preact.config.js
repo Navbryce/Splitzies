@@ -32,7 +32,7 @@ export default (config, env, helpers, params = defaultParams) => {
                 './src/**/*.ts',
                 './src/**/*.tsx',
             ],
-
+            safelist: {greedy: [/swal2/]}, // safelist for sweetalert2 dialog styles
             defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
         });
         if (process.env.NETLIFY) {
