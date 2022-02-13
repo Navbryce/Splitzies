@@ -43,7 +43,7 @@ const App: FunctionalComponent = () => {
       ) {
         await alertService.alert({
           title: "Error",
-          text: "Please enable 3rd party cookies and refresh the page. This a limitation of the Google Auth and not of the Splitzies application.",
+          text: "Please enable 3rd party cookies and refresh the page. This a limitation of Google Auth and not of the Splitzies application.",
         });
         return;
       }
