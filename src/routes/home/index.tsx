@@ -5,6 +5,7 @@ import { generateSheet } from "../../actions/generate-sheet";
 import { GAPIContext } from "../../contexts";
 import ClipboardText from "../../components/ClipboardText";
 import Spinner from "../../components/Spinner";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Home: FunctionalComponent = () => {
   const googleApi = useContext(GAPIContext);
@@ -56,6 +57,12 @@ const Home: FunctionalComponent = () => {
         <ol class="list-decimal">
           <li class="p-3">
             Download the Instacart receipt HTML (ONLY the HTML)
+            <div>
+              <LazyLoadImage
+                src="assets/demo.gif"
+                alt="Download receipt example"
+              />
+            </div>
           </li>
           <li class="p-3">
             <div>

@@ -27,6 +27,7 @@
     "preact": "^10.3.1",
     "preact-render-to-string": "^5.1.4",
     "preact-router": "^3.2.1",
+    "react-lazy-load-image-component": "^1.5.1",
     "rxjs": "^7.5.4",
     "sweetalert2": "^11.4.0"
   },
@@ -36,6 +37,7 @@
     "@types/gapi": "^0.0.41",
     "@types/gapi.auth2": "^0.0.56",
     "@types/jest": "^26.0.24",
+    "@types/react-lazy-load-image-component": "^1.5.2",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "enzyme": "^3.11.0",
