@@ -70,13 +70,14 @@ const Home: FunctionalComponent = () => {
               <FileUpload onChange={setFile} accept={".html"} />
             </div>
           </li>
-          <li class="p-3">
+          <li class="flex p-3">
             <button onClick={onSplitzies}>
               {loading && <Spinner />}Splitzies!
             </button>
+            {url && <ClipboardText text={url} />}
           </li>
+          {url && <li>Share the link with friends!</li>}
         </ol>
-        {url && <ClipboardText text={url} />}
       </div>
     </div>
   );

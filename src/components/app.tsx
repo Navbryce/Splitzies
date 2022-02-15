@@ -65,19 +65,18 @@ const App: FunctionalComponent = () => {
 
   return (
     <GAPIContext.Provider value={initializedGoogleAPI}>
-      <div
-        id="preact_root"
-        class="dark dark:bg-gradient-to-r dark:bg-primary-900 dark:from-primary-800 dark:text-blue-100 h-screen overflow-y-scroll flex flex-col justify-between"
-      >
-        <div>
-          <Header />
-          <Router>
-            <Route path="/" component={Home} />
-            <Route path="/privacy-policy" component={PrivacyPolicy} />
-            <NotFoundPage default />
-          </Router>
+      <div class="dark">
+        <div class="dark:bg-gradient-to-r dark:bg-primary-900 dark:from-primary-800 dark:text-blue-100 h-screen overflow-y-scroll flex flex-col justify-between">
+          <div>
+            <Header />
+            <Router>
+              <Route path="/" component={Home} />
+              <Route path="/privacy-policy" component={PrivacyPolicy} />
+              <NotFoundPage default />
+            </Router>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     </GAPIContext.Provider>
   );

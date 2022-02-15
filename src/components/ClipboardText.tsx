@@ -11,7 +11,7 @@ const ClipboardText: FunctionalComponent<Props> = ({ text }: Props) => {
   const onClick = useCallback(async () => {
     await navigator.clipboard.writeText(text);
     await setCopied(true);
-    setTimeout(() => setCopied(false), 250);
+    setTimeout(() => setCopied(false), 400);
   }, []);
   return (
     <div

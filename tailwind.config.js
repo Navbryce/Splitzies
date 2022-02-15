@@ -21,6 +21,7 @@ module.exports = {
             },
         }
     },
+    darkMode: "class",
     plugins: [],
     future: {
         removeDeprecatedGapUtilities: true,
