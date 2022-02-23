@@ -12,7 +12,7 @@ const ClipboardText: FunctionalComponent<Props> = ({ text }: Props) => {
     await navigator.clipboard.writeText(text);
     await setCopied(true);
     setTimeout(() => setCopied(false), 400);
-  }, []);
+  }, [text]);
   return (
     <div
       class="dark:bg-primary-900 p-3 flex flex-row rounded-md hover:bg-secondary-200 cursor-pointer"
